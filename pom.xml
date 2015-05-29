@@ -1,0 +1,99 @@
+<!--
+  ~ Copyright (c) 1998-2013 Citrix Online LLC
+  ~ All Rights Reserved Worldwide.
+  ~ THIS PROGRAM IS CONFIDENTIAL AND PROPRIETARY TO CITRIX ONLINE
+  ~ AND CONSTITUTES A VALUABLE TRADE SECRET.  Any unauthorized use,
+  ~ reproduction, modification, or disclosure of this program is
+  ~ strictly prohibited.  Any use of this program by an authorized
+  ~ licensee is strictly subject to the terms and conditions,
+  ~ including confidentiality obligations, set forth in the applicable
+  ~ License and Co-Branding Agreement between Citrix Online LLC and
+  ~ the licensee.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.citrix.g2w</groupId>
+    <artifactId>reporting-write</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>reporting-write</name>
+    <url>http://maven.apache.org</url>
+
+    <distributionManagement>
+        <repository>
+            <id>Repository Archiva Managed Internal Repository</id>
+            <name>Repository Archiva Managed Internal Repository</name>
+            <url>http://${REPOADDR}/archiva/repository/internal/</url>
+        </repository>
+        <snapshotRepository>
+            <id>Repository Archiva Managed Snapshot Repository</id>
+            <name>Repository Archiva Managed Snapshot Repository</name>
+            <url>http://${REPOADDR}/archiva/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:ssh://git@stash1.ops.expertcity.com:7999/G2WBK/reporting-write.git</connection>
+        <developerConnection>scm:git:ssh://git@stash1.ops.expertcity.com:7999/G2WBK/reporting-write.git
+        </developerConnection>
+        <url>scm:git:ssh://git@stash1.ops.expertcity.com:7999/G2WBK/reporting-write.git</url>
+    </scm>
+    
+    <dependencies>
+   	 	<dependency>
+		    <groupId>org.mongodb</groupId>
+		    <artifactId>mongodb-driver</artifactId>
+		    <version>3.0.2</version>
+		</dependency>
+    </dependencies>
+
+    <build>
+        <finalName>reporting-write</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.citrix.mojo</groupId>
+                <artifactId>duplicate-class-check</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <strictMode>true</strictMode>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
