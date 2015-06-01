@@ -15,8 +15,6 @@ package com.citrix.g2w.reporting.write.test;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,7 +47,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class TestDocument implements Serializable {
 
     @Description("Name of the testDoc file 255 + 4 (file extension)")
-    @NotNull
     private String filename;
 
     @Description("MIME Type of the testDoc file")
@@ -62,21 +59,17 @@ public class TestDocument implements Serializable {
     @Description("Organizer key of the organizer who uploaded the testDoc")
     @CreatedBy
     @LastModifiedBy
-    @NotNull
     private Long organizerkey;
 
     @Description("Account key to which organizer belongs")
     @CreatedBy
     @LastModifiedBy
-    @NotNull
     private Long accountkey;
 
     @Description("File size in bytes")
-    @NotNull
     private Long bytes;
 
     @Description("Primary Key - Cloud storage reference key for a testDoc")
-    @NotNull
     @Id
     @TextIndexed
     @Indexed(unique = true)
@@ -97,10 +90,10 @@ public class TestDocument implements Serializable {
     @PersistenceConstructor
     public TestDocument(@Value("#root.filename") String fileName,
                    @Value("#root.filetype") String fileType,
-                   @Value("#root.webinarkey") long webinarKey,
-                   @Value("#root.organizerkey") long organizerKey,
-                   @Value("#root.accountkey") long accountKey,
-                   @Value("#root.bytes") long bytes,
+                   @Value("#root.webinarkey") Long webinarKey,
+                   @Value("#root.organizerkey") Long organizerKey,
+                   @Value("#root.accountkey") Long accountKey,
+                   @Value("#root.bytes") Long bytes,
                    @Value("#root.objectkey") String objectkey,
                    @Value("#root.downloadurl") String downloadurl) {
         this.filename = fileName;
