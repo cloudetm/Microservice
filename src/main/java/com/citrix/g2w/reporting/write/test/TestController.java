@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mongodb.WriteResult;
+
 @RestController
 @Getter
 @Setter
@@ -54,16 +56,16 @@ public class TestController extends BaseController {
 	public ResponseEntity<Resource<TestDocument>> getTestDoc(
 			HttpServletRequest request) {
 		TestDocument testDoc = new TestDocument("12", "type", 23L,
-				34L, 45L, 56L, "67", "78");
+				34L, 45L, 57L, null, "78");
 
-		testDoc = testRepository.save(testDoc);
+		testDoc = testRepository.insert(testDoc);
 		
 		Query query = new Query();
-		query.addCriteria(Criteria.where("bytes").is(56L));
+		query.addCriteria(Criteria.where("webinarkey").is(23L));
 
 		Update update = new Update();
 		update.set("webinarkey", 3);
-		mongoTemplate.upsert(query, update, TestDocument.class);
+		WriteResult result = mongoTemplate.upsert(query, update, TestDocument.class);
 		List<TestDocument> docs1 = testRepository.findByWebinarkey(23);
 		
 		List<TestDocument> docs2 = testRepository.findByWebinarkey(3);
