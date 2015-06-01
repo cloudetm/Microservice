@@ -19,7 +19,36 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>reporting-write</name>
     <url>http://maven.apache.org</url>
+	<parent>
+        <!-- Note: this brings in default dependencies to create a G2W microservice -->
+        <groupId>com.citrix.g2w.microservice</groupId>
+        <artifactId>microservice-parent</artifactId>
+        <version>1.4</version>
+        <relativePath />
+        <!-- lookup parent from repository -->
+    </parent>
+    <properties>
+  		  <app.name>g2wreportingwrite</app.name>
+        <app.name.long>Reporting Write Service</app.name.long>
 
+        <!-- tomcat -->
+        <tomcat.port>0</tomcat.port>
+        <!-- 0 means random port -->
+  <!-- miscellaneous -->
+        <amazonaws.sdk.version>1.9.24</amazonaws.sdk.version>
+        <jackson.version>2.5.2</jackson.version>
+        <clover.version>4.0.3</clover.version>
+        <commons-io.version>2.4</commons-io.version>
+        <surefire.report.plugin.version>2.18.1</surefire.report.plugin.version>
+        <!-- Needed for reports to run -->
+        <surefire.and.failsafe.report.dir>target/test-report</surefire.and.failsafe.report.dir>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+        <findbugs.version>3.0.0</findbugs.version>
+        <org.ow2.asm-all.version>5.0.3</org.ow2.asm-all.version>
+        <fongo.version>1.6.2</fongo.version>
+        <!-- Spring boot startup class -->
+        <start-class>com.citrix.g2w.reporting.write.test.ReportingWrite</start-class>
+    </properties>
     <distributionManagement>
         <repository>
             <id>Repository Archiva Managed Internal Repository</id>
@@ -41,59 +70,96 @@
     </scm>
     
     <dependencies>
-   	 	<dependency>
-		    <groupId>org.mongodb</groupId>
-		    <artifactId>mongodb-driver</artifactId>
-		    <version>3.0.2</version>
-		</dependency>
+    	<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>1.2.3.RELEASE</version>
+        </dependency>
     </dependencies>
 
-    <build>
-        <finalName>reporting-write</finalName>
-        <plugins>
+	
+    <profiles>
+        <profile>
+            <id>site</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>-Xmx1024m</argLine>
+                            <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>-Xmx1024m -Duser.timezone="America/Los_Angeles"</argLine>
+                            <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.atlassian.maven.plugins</groupId>
+                        <artifactId>maven-clover2-plugin</artifactId>
+                        <version>${clover.version}</version>
+                        <configuration>
+                            <reportDescriptor>clover-report.xml</reportDescriptor>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>main</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>instrument</goal>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>site</id>
+                                <phase>pre-site</phase>
+                                <goals>
+                                    <goal>instrument</goal>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>${surefire.report.plugin.version}</version>
+                        <configuration>
+                            <reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+                        </configuration>
+                    </plugin>
 
-            <plugin>
-                <groupId>com.citrix.mojo</groupId>
-                <artifactId>duplicate-class-check</artifactId>
-                <version>1.0.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <strictMode>true</strictMode>
-                </configuration>
-            </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <version>${findbugs.version}</version>
+                        <configuration>
+                            <effort>Max</effort>
+                            <relaxed>false</relaxed>
+                        </configuration>
+                    </plugin>
 
-        </plugins>
-    </build>
+                </plugins>
+            </reporting>
+        </profile>
+    </profiles>
+
+    <build />
 
 </project>

@@ -1,0 +1,50 @@
+## For a list of some properties that can be overriden go to http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+## The definitive list of properties comes from searching the source code (including Spring source code) for @ConfigurationProperties and @Value annotations, as well as the occasional use of RelaxedEnvironment
+
+
+
+####################################################################################
+#
+#
+#     Default configuration applies to ALL PROFILES
+#
+#
+####################################################################################
+
+
+##########################################
+# Tomcat config
+##########################################
+server:
+  port: ${port:0}
+  #Set to 12k to support large cookie headers
+  tomcat.max-http-header-size: 12288
+  tomcat.uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: dev
+  main:
+    show-banner: false
+  jmx:
+    default_domain: com.citrix.g2w.reporting.write
+
+info:
+  service:
+    name: ${app.name}
+    build:
+      projectVersion: ${project.version}
+      rpmBuild: ${rpm.build:unknown}
+
+logging:
+  file: g2wreportingwrite.log
+  level:
+    #com.netflix.discovery: OFF
+    com: INFO
+    org: INFO
+    net: INFO
+
+log:
+  access:
+    file:
+      directory: /opt/ec/services/g2wreportingwrite/logs
