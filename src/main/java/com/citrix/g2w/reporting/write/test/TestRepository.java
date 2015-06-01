@@ -15,21 +15,12 @@ package com.citrix.g2w.reporting.write.test;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 public interface TestRepository extends MongoRepository<TestDocument, String> {
 
     @Query("{ 'webinarkey' : ?0}")
-    Page<TestDocument> findByWebinarkey(Long webinarkey, Pageable page);
-
-    @Query("{ 'webinarkey' : ?0}")
     List<TestDocument> findByWebinarkey(long webinarkey);
-
-    @Query("{ 'webinarkey' : ?0, '_id' : ?1 }")
-    TestDocument findByWebinarkeyAndObjectkey(long webinarkey, String objectkey);
-
 
 }

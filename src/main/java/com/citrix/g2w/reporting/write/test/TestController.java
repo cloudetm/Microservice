@@ -14,6 +14,8 @@
 
 package com.citrix.g2w.reporting.write.test;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.Getter;
@@ -25,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,22 +37,29 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestController extends BaseController {
 
-    public static final String BASE_URL = "/webinars/test";
+	public static final String BASE_URL = "/webinars/test";
 
-    @NonNull
-    @Autowired
-    private TestRepository testRepository;
-    
-    @RequestMapping(value = BASE_URL + "/{objectkey}", method = RequestMethod.GET, produces = {"application/hal+json;charset=UTF-8", "application/json;charset=UTF-8"})
-    public ResponseEntity<Resource<TestDocument>> getTestDoc(HttpServletRequest request, @PathVariable String objectkey) {
-    	TestDocument testDoc = testRepository.findByWebinarkeyAndObjectkey(12, objectkey);
-        if (testDoc == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+	@NonNull
+	@Autowired
+	private TestRepository testRepository;
 
-        Resource testDocResource = new Resource<>(testDoc);
+	@RequestMapping(value = BASE_URL, method = RequestMethod.POST, produces = {
+			"application/hal+json;charset=UTF-8",
+			"application/json;charset=UTF-8" })
+	public ResponseEntity<Resource<TestDocument>> getTestDoc(
+			HttpServletRequest request) {
+		TestDocument testDoc = new TestDocument("12", "type", 23,
+				34, 45, 56, "67", "78");
 
-        return new ResponseEntity<>(testDocResource, HttpStatus.OK);
-    }
+		testDoc = testRepository.insert(testDoc);
+		List<TestDocument> docs = testRepository.findByWebinarkey(23);
+		if (testDoc == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		Resource testDocResource = new Resource<>(testDoc);
+
+		return new ResponseEntity<>(testDocResource, HttpStatus.OK);
+	}
 
 }
