@@ -14,29 +14,22 @@ package com.citrix.g2w.reporting.write.test;
  * the licensee.
  */
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import java.net.UnknownHostException;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-
-import com.google.common.collect.Lists;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Configuration class needed to initialize MongoDB
@@ -49,15 +42,9 @@ import lombok.Setter;
 @EnableMongoRepositories
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "spring.data.mongodb")
-@Profile({"ED", "RC", "STAGE", "LIVE"})
-public class MongoConfiguration extends AbstractMongoConfiguration {
+public class MongoConfiguration  {
 
-    private String database;
-    private List<String> hosts;
-    private String username;
-    private String password;
-    private int port;
+    private String database = "mydb";
 
     @Bean
     public MongoTemplate mongoTemplate(Mongo mongo) {
@@ -71,20 +58,13 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
      *
      * @return must not be {@literal null}.
      */
-    @Override
     protected String getDatabaseName() {
         return database;
     }
 
-    @Override
     @Bean
     public Mongo mongo() throws UnknownHostException {
-        MongoCredential credential = MongoCredential.createMongoCRCredential(username, database, password.toCharArray());
-        List<ServerAddress> hostList = Lists.newArrayList();
-        for(String aHost : hosts) {
-            hostList.add(new ServerAddress(aHost, port));
-        }
-        Mongo mongo = new MongoClient(hostList, Arrays.asList(credential));
+        Mongo mongo = new MongoClient();
         mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
         return mongo;
     }
