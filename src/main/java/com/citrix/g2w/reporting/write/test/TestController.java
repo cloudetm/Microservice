@@ -56,9 +56,9 @@ public class TestController extends BaseController {
 	public ResponseEntity<Resource<TestDocument>> getTestDoc(
 			HttpServletRequest request) {
 		TestDocument testDoc = new TestDocument("12", "type", 23L,
-				34L, 45L, 57L, null, "78");
+				34L, 45L, 57L, "6666", "78");
 
-		testDoc = testRepository.insert(testDoc);
+		testDoc = testRepository.save(testDoc);
 		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("webinarkey").is(23L));
@@ -71,6 +71,9 @@ public class TestController extends BaseController {
 		List<TestDocument> docs2 = testRepository.findByWebinarkey(3);
 		
 		List<TestDocument> docs3 = testRepository.findAll();
+		
+		testRepository.upsert();
+		
 		if (testDoc == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
