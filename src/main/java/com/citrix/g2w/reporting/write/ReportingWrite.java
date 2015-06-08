@@ -12,7 +12,7 @@
  * the licensee.
  */
 
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +25,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 @SpringBootApplication
-//@EnableDiscoveryClient //comment this out until we have a registration discovery service in production
-@EnableCircuitBreaker //for circuit breakers (https://github.com/Netflix/Hystrix/wiki)
+@EnableCircuitBreaker 
 @EnableFeignClients
 @ConfigurationProperties
 @Getter

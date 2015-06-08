@@ -1,4 +1,4 @@
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write;
 
 /*
  * Copyright (c) 1998-2015 Citrix Online LLC
@@ -34,8 +34,6 @@ import com.mongodb.WriteConcern;
 /**
  * Configuration class needed to initialize MongoDB
  *
- * @author KK (Kaustubh Keshav)
- * @version 0.1 - 4/13/15
  */
 @Configuration
 @ComponentScan
