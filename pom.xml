@@ -30,12 +30,28 @@
 		<!-- miscellaneous -->
 		<clover.version>4.0.3</clover.version>
 		<surefire.report.plugin.version>2.18.1</surefire.report.plugin.version>
+		
+		
+        <!-- g2w microservices base libraries -->
+        <microservice.support.version>1.0.0-SNAPSHOT</microservice.support.version>
+
+        <!--Broker platform libraries-->
+        <broker.platform.version>1.1.85</broker.platform.version>
+
+        <!-- Power mock with easyMock -->
+        <powermock.version>1.6.2</powermock.version>
+        <easymock.version>3.3.1</easymock.version>
+        <asm.version>5.0.3</asm.version>
+
+        <!-- for API testing -->
+        <com.jayway.version>2.4.0</com.jayway.version>
+
 		<!-- Needed for reports to run -->
 		<surefire.and.failsafe.report.dir>target/test-report</surefire.and.failsafe.report.dir>
 		<dependency.locations.enabled>false</dependency.locations.enabled>
 		<findbugs.version>3.0.0</findbugs.version>
 		<!-- Spring boot startup class -->
-		<start-class>com.citrix.g2w.reporting.write.test.ReportingWrite</start-class>
+		<start-class>com.citrix.g2w.reporting.write.ReportingWrite</start-class>
 	</properties>
 	<scm>
 		<connection>scm:git:ssh://git@stash1.ops.expertcity.com:7999/G2WBK/reporting-write.git</connection>
@@ -52,25 +68,25 @@
 		<dependency>
 			<groupId>com.citrix.g2w</groupId>
 			<artifactId>microservices-monitoring-support</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${microservice.support.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.citrix.g2w</groupId>
 			<artifactId>microservices-error-handling-support</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${microservice.support.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.citrix.g2w</groupId>
 			<artifactId>microservices-tracking-support</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${microservice.support.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.citrix.g2w</groupId>
 			<artifactId>microservices-logging-support</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${microservice.support.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -96,28 +112,12 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
-		<!-- Feign Spring Cloud -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
-		</dependency>
-
-		<!-- Hystrix Ciruit brakers -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency>
-
-		<!-- Eureka Client -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>
 
 		<!-- citrix libraries -->
 		<dependency>
 			<groupId>com.citrix</groupId>
 			<artifactId>encryption</artifactId>
+			<version>${broker.platform.version}</version>
 		</dependency>
 
 		<!-- Power mock with easyMock -->
@@ -125,22 +125,26 @@
 			<groupId>org.easymock</groupId>
 			<artifactId>easymock</artifactId>
 			<scope>test</scope>
+			<version>${easymock.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-module-junit4</artifactId>
 			<scope>test</scope>
+			<version>${powermock.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-easymock</artifactId>
 			<scope>test</scope>
+			<version>${powermock.version}</version>
 		</dependency>
 
 		<!--Needed to support java 8 compatibility of cgilib compiled classes -->
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
 			<artifactId>asm-all</artifactId>
+			<version>${asm.version}</version>
 		</dependency>
 
 		<!-- Utility Annotations for minimizing boilerplate code -->
@@ -160,10 +164,12 @@
 			<groupId>com.jayway.restassured</groupId>
 			<artifactId>spring-mock-mvc</artifactId>
 			<scope>test</scope>
+			<version>${com.jayway.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jayway.restassured</groupId>
 			<artifactId>json-path</artifactId>
+			<version>${com.jayway.version}</version>
 		</dependency>
 	</dependencies>
 
