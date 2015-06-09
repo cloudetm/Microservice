@@ -11,16 +11,10 @@
  * License and Co-Branding Agreement between Citrix Online LLC and
  * the licensee.
  */
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write.sample;
 
-import java.util.List;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+public interface CustomTestRepository {
 
-public interface TestRepository extends MongoRepository<TestDocument, String>, CustomTestRepository {
-
-    @Query("{ 'webinarkey' : ?0}")
-    List<TestDocument> findByWebinarkey(long webinarkey);
-
+	void upsert();
 }

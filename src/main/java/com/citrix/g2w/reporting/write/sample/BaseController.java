@@ -12,7 +12,7 @@
  * the licensee.
  */
 
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write.sample;
 
 import javax.validation.constraints.NotNull;
 

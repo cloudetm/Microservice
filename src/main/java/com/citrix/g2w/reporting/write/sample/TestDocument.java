@@ -11,7 +11,7 @@
  * License and Co-Branding Agreement between Citrix Online LLC and
  * the licensee.
  */
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write.sample;
 
 import java.io.Serializable;
 

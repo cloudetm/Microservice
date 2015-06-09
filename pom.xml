@@ -30,25 +30,23 @@
 		<!-- miscellaneous -->
 		<clover.version>4.0.3</clover.version>
 		<surefire.report.plugin.version>2.18.1</surefire.report.plugin.version>
-		
-		
-        <!-- g2w microservices base libraries -->
-        <microservice.support.version>1.0.0-SNAPSHOT</microservice.support.version>
 
-        <!--Broker platform libraries-->
-        <broker.platform.version>1.1.85</broker.platform.version>
 
-        <!-- Power mock with easyMock -->
-        <powermock.version>1.6.2</powermock.version>
-        <easymock.version>3.3.1</easymock.version>
-        <asm.version>5.0.3</asm.version>
+		<!-- g2w microservices base libraries -->
+		<microservice.support.version>1.0.0-SNAPSHOT</microservice.support.version>
 
-        <!-- for API testing -->
-        <com.jayway.version>2.4.0</com.jayway.version>
+		<!--Broker platform libraries -->
+		<broker.platform.version>1.1.85</broker.platform.version>
+
+		<!-- Power mock with easyMock -->
+		<powermock.version>1.6.2</powermock.version>
+		<easymock.version>3.3.1</easymock.version>
+		<asm.version>5.0.3</asm.version>
+
+		<!-- for API testing -->
+		<com.jayway.version>2.4.0</com.jayway.version>
 
 		<!-- Needed for reports to run -->
-		<surefire.and.failsafe.report.dir>target/test-report</surefire.and.failsafe.report.dir>
-		<dependency.locations.enabled>false</dependency.locations.enabled>
 		<findbugs.version>3.0.0</findbugs.version>
 		<!-- Spring boot startup class -->
 		<start-class>com.citrix.g2w.reporting.write.ReportingWrite</start-class>
@@ -174,88 +172,115 @@
 	</dependencies>
 
 
-	<profiles>
-		<profile>
-			<id>site</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<configuration>
-							<argLine>-Xmx1024m</argLine>
-							<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<argLine>-Xmx1024m -Duser.timezone="America/Los_Angeles"</argLine>
-							<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>com.atlassian.maven.plugins</groupId>
-						<artifactId>maven-clover2-plugin</artifactId>
-						<version>${clover.version}</version>
-						<configuration>
-							<reportDescriptor>clover-report.xml</reportDescriptor>
-						</configuration>
-						<executions>
-							<execution>
-								<id>main</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>instrument</goal>
-									<goal>aggregate</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>site</id>
-								<phase>pre-site</phase>
-								<goals>
-									<goal>instrument</goal>
-									<goal>aggregate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<argLine>-Xmx1024m</argLine>
+					<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>-Xmx1024m -Duser.timezone="America/Los_Angeles"</argLine>
+					<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.atlassian.maven.plugins</groupId>
+				<artifactId>maven-clover2-plugin</artifactId>
+				<version>${clover.version}</version>
+				<configuration>
+					<reportDescriptor>clover-report.xml</reportDescriptor>
+				</configuration>
+				<executions>
+					<execution>
+						<id>main</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>site</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${surefire.report.plugin.version}</version>
+				<configuration>
+					<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
+				</configuration>
+			</plugin>
 
-			<reporting>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-report-plugin</artifactId>
-						<version>${surefire.report.plugin.version}</version>
-						<configuration>
-							<reportsDirectory>${surefire.and.failsafe.report.dir}</reportsDirectory>
-						</configuration>
-					</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.1</version>
+			</plugin>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jxr-plugin</artifactId>
-						<version>2.1</version>
-					</plugin>
-
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>findbugs-maven-plugin</artifactId>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.version}</version>
+				<configuration>
+					<!-- Enables analysis which takes more memory but finds more bugs. If 
+						you run out of memory, changes the value of the effort element to 'Low'. -->
+					<effort>Max</effort>
+					<!-- Build doesn't fail if problems are found -->
+					<failOnError>false</failOnError>
+					<!-- Reports all bugs (other values are medium and max) -->
+					<threshold>Low</threshold>
+					<!-- Produces XML report -->
+					<xmlOutput>true</xmlOutput>
+					<!-- Configures the directory in which the XML report is created -->
+					<findbugsXmlOutputDirectory>${project.build.directory}/findbugs</findbugsXmlOutputDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xml-maven-plugin</artifactId>
+				<version>1.0</version>
+				<configuration>
+					<transformationSets>
+						<transformationSet>
+							<!-- Configures the source directory of XML files. -->
+							<dir>${project.build.directory}/findbugs</dir>
+							<!-- Configures the directory in which the FindBugs report is written. -->
+							<outputDir>${project.build.directory}/findbugs</outputDir>
+							<stylesheet>default.xsl</stylesheet>
+							<fileMappers>
+								<!-- Configures the file extension of the output files. -->
+								<fileMapper
+									implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+									<targetExtension>.html</targetExtension>
+								</fileMapper>
+							</fileMappers>
+						</transformationSet>
+					</transformationSets>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.google.code.findbugs</groupId>
+						<artifactId>findbugs</artifactId>
 						<version>${findbugs.version}</version>
-						<configuration>
-							<effort>Max</effort>
-							<relaxed>false</relaxed>
-						</configuration>
-					</plugin>
+					</dependency>
+				</dependencies>
+			</plugin>
 
-				</plugins>
-			</reporting>
-		</profile>
-	</profiles>
-
-	<build />
+		</plugins>
+	</build>
 
 </project>

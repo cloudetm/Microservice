@@ -1,4 +1,4 @@
-package com.citrix.g2w.reporting.write.test;
+package com.citrix.g2w.reporting.write.sample;
 
 
 public class TestRepositoryImpl implements CustomTestRepository{
