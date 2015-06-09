@@ -48,6 +48,7 @@
 
 		<!-- Needed for reports to run -->
 		<findbugs.version>3.0.0</findbugs.version>
+		<checkstyle.version>2.15</checkstyle.version>
 		<!-- Spring boot startup class -->
 		<start-class>com.citrix.g2w.reporting.write.ReportingWrite</start-class>
 	</properties>
@@ -279,8 +280,24 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>
