@@ -40,7 +40,7 @@ import com.mongodb.WriteResult;
 @Getter
 @Setter
 @Slf4j
-public class TestController extends BaseController {
+public class TestController extends SampleBaseController {
 
 	public static final String BASE_URL = "/webinars/test";
 

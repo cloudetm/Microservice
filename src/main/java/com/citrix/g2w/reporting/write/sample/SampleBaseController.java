@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Getter
 @Setter
 @Slf4j
-public class BaseController implements ResourceProcessor<RepositoryLinksResource> {
+public class SampleBaseController implements ResourceProcessor<RepositoryLinksResource> {
 
     @NotNull
     private String baseURL;
