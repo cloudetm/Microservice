@@ -48,3 +48,94 @@ log:
   access:
     file:
       directory: /opt/ec/services/g2wreportingwrite/logs
+---
+####################################################################################
+#
+#
+#     ED profile
+#
+#
+####################################################################################   
+---   
+spring:
+  profiles: ED
+  data:
+    mongodb:
+      hosts:
+       - g2whandoutsed5.acad.expertcity.com
+       - g2whandoutsed20.avad.expertcity.com
+       - g2whandoutsed-mongo01.acad.expertcity.com
+       - g2whandoutsed19.avad.expertcity.com
+       - g2whandoutsed20.avad.expertcity.com
+      port: 27017
+      database: g2whandouts
+      username: g2whandouts
+      encrypted:
+        password: lcmvGDlBDwhbvt6qAU9vMA==:9YVhTHt6ka39aNpqz6ttQLPxqsslhn0CgL1hV/mD9CVbasy0zfTtcZ09JWPGMp/f
+####################################################################################
+#
+#
+#     RC profile
+#
+#
+####################################################################################
+---
+spring:
+  profiles: RC
+  data:
+    mongodb:
+      hosts:
+       - g2whandoutsrc-mongom.acad.expertcity.com
+      port: 27017
+      database: g2whandouts
+      username: g2whandouts
+      encrypted:
+        password: lcmvGDlBDwhbvt6qAU9vMA==:9YVhTHt6ka39aNpqz6ttQLPxqsslhn0CgL1hV/mD9CVbasy0zfTtcZ09JWPGMp/f
+####################################################################################
+#
+#
+#     STAGE profile
+#
+#
+####################################################################################
+---
+spring:
+  profiles: STAGE
+  data:
+    mongodb:
+      hosts:
+       - g2w-stage-mongo01.aca.expertcity.com
+       - g2w-stage-mongo02.aca.expertcity.com
+       - g2w-stage-mongo01.ava.expertcity.com
+       - g2w-stage-mongo02.ava.expertcity.com
+      port: 27017
+      database: g2whandouts
+      username: g2whandouts
+      encrypted:
+        password: CSxElwC1x6flVItbDyLAEw==:aa1dY3BkeHwsYi0bP51MurWJg9CmbjohwinTphkaIx2due9xtl3XY++gq+RU4wGX3Ds2cW1lz5PwCK2oiHoDvA==
+
+####################################################################################
+#
+#
+#     LIVE profile
+#
+#
+####################################################################################
+---
+spring:
+  profiles: LIVE
+  data:
+    mongodb:
+      hosts:
+       - g2w-mongo01.aca.expertcity.com
+       - g2w-mongo02.aca.expertcity.com
+       - g2w-mongo01.ava.expertcity.com
+       - g2w-mongo02.ava.expertcity.com
+      port: 27017
+      database: g2whandouts
+      username: g2whandouts
+      encrypted:
+        password: CSxElwC1x6flVItbDyLAEw==:aa1dY3BkeHwsYi0bP51MurWJg9CmbjohwinTphkaIx2due9xtl3XY++gq+RU4wGX3Ds2cW1lz5PwCK2oiHoDvA==
+##########################################
+# Microservice properties
+##########################################
