@@ -35,8 +35,8 @@ public class ReportingWrite extends SpringBootServletInitializer {
 
     /**
      * start the application.
-	 * @param args
-	 */
+     * @param args
+     */
     public static void main(final String[] args) {
         SpringApplication.run(ReportingWrite.class, args);
     }

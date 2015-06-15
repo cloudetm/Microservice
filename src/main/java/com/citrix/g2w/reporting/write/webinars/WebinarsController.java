@@ -53,7 +53,7 @@ public class WebinarsController extends BaseController {
      * @param webinarKey
      * @return
      */
-    @RequestMapping(value = BASE_URL + "/{webinarKey}", 
+    @RequestMapping(value = BASE_URL + "/{webinarKey}",
     		method = RequestMethod.GET, produces = {
             "application/hal+json;charset=UTF-8",
             "application/json;charset=UTF-8" })

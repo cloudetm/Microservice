@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Webinar implements Serializable {
 
-	@Description("Webinar key to which webinar is associated")
+    @Description("Webinar key to which webinar is associated")
     @Indexed
     private Long webinarkey;
 

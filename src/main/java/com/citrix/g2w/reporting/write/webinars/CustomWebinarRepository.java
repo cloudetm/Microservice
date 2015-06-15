@@ -23,9 +23,9 @@ import java.util.List;
  */
 public interface CustomWebinarRepository {
 
-	/**
+    /**
      * upsert the Webinar.
-     * @param webianrs
+     * @param webinars
      */
-    void upsert(List<Webinar> webianrs);
+    void upsert(List<Webinar> webinars);
 }

@@ -28,7 +28,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Test Mongo cofiguration to enable all tests 
+ * Test Mongo cofiguration to enable all tests
  * to run against {@link com.mongodb.FongoDB}.
  * Refer https://github.com/fakemongo/fongo.
  * @author ankit

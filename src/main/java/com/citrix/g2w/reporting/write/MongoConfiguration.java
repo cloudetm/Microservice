@@ -97,8 +97,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {
-        ValidatingMongoEventListener validatingMongoEventListener = 
-        		new ValidatingMongoEventListener(validator());
+        ValidatingMongoEventListener validatingMongoEventListener =
+                new ValidatingMongoEventListener(validator());
         return validatingMongoEventListener;
     }
 
