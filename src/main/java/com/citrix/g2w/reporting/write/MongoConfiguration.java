@@ -40,6 +40,7 @@ import lombok.Setter;
 
 /**
  * Configuration class needed to initialize MongoDB
+ * @author ankit
  *
  */
 @Configuration

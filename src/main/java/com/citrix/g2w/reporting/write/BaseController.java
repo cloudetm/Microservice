@@ -28,6 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citrix.g2w.reporting.write.webinars.WebinarsController;
 
+/**
+ * base controller for all resources
+ * @author ankit
+ *
+ */
 @RestController
 @RequestMapping("/")
 @Getter
@@ -38,6 +43,9 @@ public class BaseController implements ResourceProcessor<RepositoryLinksResource
     @NotNull
     private String baseURL;
 
+    /**
+     * add resources 
+     */
     @Override
     public RepositoryLinksResource process(RepositoryLinksResource resource) {
         resource = new RepositoryLinksResource();

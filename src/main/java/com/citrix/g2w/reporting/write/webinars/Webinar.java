@@ -33,6 +33,11 @@ import org.springframework.data.rest.core.annotation.Description;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * pojo for webinar collection
+ * @author ankit
+ *
+ */
 @Document(collection = "webinars")
 @AllArgsConstructor
 @NoArgsConstructor

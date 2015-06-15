@@ -22,12 +22,21 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
+/**
+ * Application class for reporting write service
+ * @author ankit
+ *
+ */
 @SpringBootApplication
 @ConfigurationProperties
 @Getter
 @Setter
 public class ReportingWrite extends SpringBootServletInitializer {
 
+	/**
+	 * start the application
+	 * @param args
+	 */
     public static void main(String[] args) {
         SpringApplication.run(ReportingWrite.class, args);
     }

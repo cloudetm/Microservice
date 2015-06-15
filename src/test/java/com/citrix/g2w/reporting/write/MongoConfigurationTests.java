@@ -31,6 +31,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Tests for {@link MongoConfiguration}
+ * @author ankit
  *
  */
 public class MongoConfigurationTests {

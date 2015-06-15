@@ -22,6 +22,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * base abstract class to be used by all integration tests
+ * @author ankit
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {AbstractWebIntegrationTest.TestConfig.class, ReportingWrite.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)

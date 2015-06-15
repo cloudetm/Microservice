@@ -30,6 +30,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Profile;
 
+/**
+ * test for {@link ReportingWrite}
+ * @author ankit
+ *
+ */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SpringApplication.class)
 @Profile("test")

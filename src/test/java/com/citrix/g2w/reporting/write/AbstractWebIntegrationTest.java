@@ -40,6 +40,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.citrix.g2w.microservice.testsupport.MicroserviceMockMvcBuilder;
 
+/**
+ * base web integration test class for common controller config 
+ * @author ankit
+ *
+ */
 @Log
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration

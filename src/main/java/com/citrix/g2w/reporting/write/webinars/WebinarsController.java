@@ -32,6 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.citrix.g2w.reporting.write.BaseController;
 
+/**
+ * controller for webinar collection
+ * @author ankit
+ *
+ */
 @RestController
 @Getter
 @Setter
@@ -43,6 +48,11 @@ public class WebinarsController extends BaseController {
 	@Autowired
 	private WebinarRepository webinarRepository;
 	
+	/**
+	 * get webinars by webinar key
+	 * @param webinarKey
+	 * @return
+	 */
 	@RequestMapping(value = BASE_URL + "/{webinarKey}", method = RequestMethod.GET, produces = {
 			"application/hal+json;charset=UTF-8",
 			"application/json;charset=UTF-8" })

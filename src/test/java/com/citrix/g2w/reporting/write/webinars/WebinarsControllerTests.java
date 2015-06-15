@@ -32,6 +32,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.google.common.collect.Lists;
 
+/**
+ * unit test for webinar controller
+ * @author ankit
+ *
+ */
 @RunWith(PowerMockRunner.class)
 public class WebinarsControllerTests {
 

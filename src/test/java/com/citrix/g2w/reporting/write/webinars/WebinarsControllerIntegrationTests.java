@@ -26,6 +26,11 @@ import org.springframework.web.context.WebApplicationContext;
 import com.citrix.g2w.microservice.testsupport.MicroserviceMockMvcBuilder;
 import com.citrix.g2w.reporting.write.AbstractIntegrationTest;
 
+/**
+ * integration test for webinar resource
+ * @author ankit
+ *
+ */
 public class WebinarsControllerIntegrationTests extends AbstractIntegrationTest {
 
     protected MicroserviceMockMvc mvc;
