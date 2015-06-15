@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.Query;
  * @author ankit
  *
  */
-public interface WebinarRepository extends 
+public interface WebinarRepository extends
         CustomWebinarRepository, MongoRepository<Webinar, String> {
 
     /**

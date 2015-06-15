@@ -54,7 +54,7 @@ public class WebinarsController extends BaseController {
      * @return
      */
     @RequestMapping(value = BASE_URL + "/{webinarKey}",
-    		method = RequestMethod.GET, produces = {
+            method = RequestMethod.GET, produces = {
             "application/hal+json;charset=UTF-8",
             "application/json;charset=UTF-8" })
     public ResponseEntity<Resources<Webinar>> getWebinar(
