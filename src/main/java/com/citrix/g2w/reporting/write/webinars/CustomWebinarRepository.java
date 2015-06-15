@@ -16,14 +16,15 @@ package com.citrix.g2w.reporting.write.webinars;
 import java.util.List;
 
 /**
- * custom webinar repository
+ * custom webinar repository.
  * @author ankit
  *
  */
 public interface CustomWebinarRepository {
-	
-	/**
-	 * upsert the Webinar
+    
+    /**
+     * upsert the Webinar.
+	 * @param webianrs
 	 */
-	void upsert(List<Webinar> webianrs);
+    void upsert(List<Webinar> webianrs);
 }

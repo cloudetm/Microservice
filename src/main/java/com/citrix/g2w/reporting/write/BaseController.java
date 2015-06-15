@@ -29,7 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.citrix.g2w.reporting.write.webinars.WebinarsController;
 
 /**
- * base controller for all resources
+ * base controller for all resources.
+ * 
  * @author ankit
  *
  */
@@ -38,18 +39,20 @@ import com.citrix.g2w.reporting.write.webinars.WebinarsController;
 @Getter
 @Setter
 @Slf4j
-public class BaseController implements ResourceProcessor<RepositoryLinksResource> {
+public class BaseController implements
+		ResourceProcessor<RepositoryLinksResource> {
 
-    @NotNull
-    private String baseURL;
+	@NotNull
+	private String baseURL;
 
-    /**
-     * add resources 
-     */
-    @Override
-    public RepositoryLinksResource process(RepositoryLinksResource resource) {
-        resource = new RepositoryLinksResource();
-        resource.add((new Link(baseURL + WebinarsController.BASE_URL + "/{webinarkey}")));
-        return resource;
-    }
+	/**
+	 * add resources.
+	 */
+	@Override
+	public RepositoryLinksResource process(RepositoryLinksResource resource) {
+		resource = new RepositoryLinksResource();
+		resource.add((new Link(baseURL + WebinarsController.BASE_URL
+				+ "/{webinarkey}")));
+		return resource;
+	}
 }

@@ -28,9 +28,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Test Mongo cofiguration to enable all tests to run against {@link com.mongodb.FongoDB}
+ * Test Mongo cofiguration to enable all tests 
+ * to run against {@link com.mongodb.FongoDB}.
  *
- * Refer https://github.com/fakemongo/fongo
+ * Refer https://github.com/fakemongo/fongo.
  * @author ankit
  *
  */
@@ -50,7 +51,7 @@ public class MongoConfigurationDev {
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() {
+	public MongoTemplate mongoTemplate() {
         MongoTemplate mongoTemplate = new MongoTemplate(mongo(), "fongo");
         mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
         return mongoTemplate;

@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.citrix.g2w.reporting.write.BaseController;
 
 /**
- * controller for webinar collection
+ * controller for webinar collection.
+ * 
  * @author ankit
  *
  */
@@ -47,17 +48,19 @@ public class WebinarsController extends BaseController {
 
 	@Autowired
 	private WebinarRepository webinarRepository;
-	
+
 	/**
-	 * get webinars by webinar key
+	 * get webinars by webinar key.
+	 * 
 	 * @param webinarKey
 	 * @return
 	 */
 	@RequestMapping(value = BASE_URL + "/{webinarKey}", method = RequestMethod.GET, produces = {
 			"application/hal+json;charset=UTF-8",
 			"application/json;charset=UTF-8" })
-	public ResponseEntity<Resources<Webinar>> getWebinar(@PathVariable long webinarKey) {
-		
+	public ResponseEntity<Resources<Webinar>> getWebinar(
+			@PathVariable long webinarKey) {
+
 		List<Webinar> webinars = webinarRepository.findByWebinarkey(webinarKey);
 		if (CollectionUtils.isEmpty(webinars)) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

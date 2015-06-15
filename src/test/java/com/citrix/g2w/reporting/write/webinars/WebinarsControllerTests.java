@@ -45,44 +45,44 @@ public class WebinarsControllerTests {
 
     @Before
     public void setup(){
-    	controller = new WebinarsController();
-    	webinarRepository = EasyMock.createMock(WebinarRepository.class);
-    	ReflectionTestUtils.setField(controller, "webinarRepository", webinarRepository);
+        controller = new WebinarsController();
+        webinarRepository = EasyMock.createMock(WebinarRepository.class);
+        ReflectionTestUtils.setField(controller, "webinarRepository", webinarRepository);
     }
     
     public void doReplay() {
-    	EasyMock.replay(webinarRepository);
+        EasyMock.replay(webinarRepository);
     }
     
     public void doVerify() {
-    	EasyMock.verify(webinarRepository);
+        EasyMock.verify(webinarRepository);
     }
     
     @Test
     public void testGetWebinarNotFound() {
-    	List<Webinar> webinars = Lists.newArrayList();
-    	EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
-    	doReplay();
-    	ResponseEntity webinarResource = controller.getWebinar(123L);
-    	assertEquals(HttpStatus.NOT_FOUND, webinarResource.getStatusCode());
-    	doVerify();
+        List<Webinar> webinars = Lists.newArrayList();
+        EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
+        doReplay();
+        ResponseEntity webinarResource = controller.getWebinar(123L);
+        assertEquals(HttpStatus.NOT_FOUND, webinarResource.getStatusCode());
+        doVerify();
     }
     
     @Test
     public void testGetWebinar() {
-    	List<Webinar> webinars = Lists.newArrayList();
-    	Webinar webinar = new Webinar();
-    	webinars.add(webinar);
-    	EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
-    	doReplay();
-    	ResponseEntity<Resources<Webinar>> webinarResource = controller.getWebinar(123L);
-    	assertEquals(HttpStatus.OK, webinarResource.getStatusCode());
-    	Resources<Webinar> resource = webinarResource.getBody();
-    	assertNotNull(resource);
-    	Collection<Webinar> webinarsResult = resource.getContent();
-    	assertNotNull(webinarsResult);
-    	assertTrue(webinarsResult.size() ==  1);
-    	assertEquals(webinar.getWebinarkey(), webinarsResult.iterator().next().getWebinarkey());
-    	doVerify();
+        List<Webinar> webinars = Lists.newArrayList();
+        Webinar webinar = new Webinar();
+        webinars.add(webinar);
+        EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
+        doReplay();
+        ResponseEntity<Resources<Webinar>> webinarResource = controller.getWebinar(123L);
+        assertEquals(HttpStatus.OK, webinarResource.getStatusCode());
+        Resources<Webinar> resource = webinarResource.getBody();
+        assertNotNull(resource);
+        Collection<Webinar> webinarsResult = resource.getContent();
+        assertNotNull(webinarsResult);
+        assertTrue(webinarsResult.size() ==  1);
+        assertEquals(webinar.getWebinarkey(), webinarsResult.iterator().next().getWebinarkey());
+        doVerify();
     }
 }

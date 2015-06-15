@@ -39,7 +39,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Configuration class needed to initialize MongoDB
+ * Configuration class needed to initialize MongoDB.
+ * 
  * @author ankit
  *
  */
@@ -49,73 +50,76 @@ import lombok.Setter;
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "spring.data.mongodb")
-@Profile({"ED", "RC", "STAGE", "LIVE"})
+@Profile({ "ED", "RC", "STAGE", "LIVE" })
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
-    private String database;
-    private List<String> hosts;
-    private String username;
-    private String password;
-    private int port;
+	private String database;
+	private List<String> hosts;
+	private String username;
+	private String password;
+	private int port;
 
-    @Bean
-    public MongoTemplate mongoTemplate(Mongo mongo) {
-        MongoTemplate mongoTemplate = new MongoTemplate(mongo, getDatabaseName());
-        mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
-        return mongoTemplate;
-    }
+	@Bean
+	public MongoTemplate mongoTemplate(Mongo mongo) {
+		MongoTemplate mongoTemplate = new MongoTemplate(mongo,
+				getDatabaseName());
+		mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
+		return mongoTemplate;
+	}
 
-    /**
-     * Return the name of the database to connect to.
-     *
-     * @return must not be {@literal null}.
-     */
-    @Override
-    protected String getDatabaseName() {
-        return database;
-    }
+	/**
+	 * Return the name of the database to connect to.
+	 *
+	 * @return must not be {@literal null}.
+	 */
+	@Override
+	protected String getDatabaseName() {
+		return database;
+	}
 
-    @Override
-    @Bean
-    public Mongo mongo() throws UnknownHostException {
-        MongoCredential credential = MongoCredential.createMongoCRCredential(username, database, password.toCharArray());
-        List<ServerAddress> hostList = Lists.newArrayList();
-        for(String aHost : hosts) {
-            hostList.add(new ServerAddress(aHost, port));
-        }
-        Mongo mongo = new MongoClient(hostList, Arrays.asList(credential));
-        mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
-        return mongo;
-    }
+	@Override
+	@Bean
+	public Mongo mongo() throws UnknownHostException {
+		MongoCredential credential = MongoCredential.createMongoCRCredential(
+				username, database, password.toCharArray());
+		List<ServerAddress> hostList = Lists.newArrayList();
+		for (String aHost : hosts) {
+			hostList.add(new ServerAddress(aHost, port));
+		}
+		Mongo mongo = new MongoClient(hostList, Arrays.asList(credential));
+		mongo.setWriteConcern(WriteConcern.ACKNOWLEDGED);
+		return mongo;
+	}
 
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
-    }
+	@Bean
+	public LocalValidatorFactoryBean validator() {
+		return new LocalValidatorFactoryBean();
+	}
 
-    @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() {
-        ValidatingMongoEventListener validatingMongoEventListener = new ValidatingMongoEventListener(validator());
-        return validatingMongoEventListener;
-    }
-    
-    protected void setDatabase(String database) {
+	@Bean
+	public ValidatingMongoEventListener validatingMongoEventListener() {
+		ValidatingMongoEventListener validatingMongoEventListener = new ValidatingMongoEventListener(
+				validator());
+		return validatingMongoEventListener;
+	}
+
+	protected void setDatabase(String database) {
 		this.database = database;
 	}
-    
-    protected void setHosts(List<String> hosts) {
+
+	protected void setHosts(List<String> hosts) {
 		this.hosts = hosts;
 	}
-    
-    protected void setPassword(String password) {
+
+	protected void setPassword(String password) {
 		this.password = password;
 	}
-    
-    protected void setUsername(String username) {
+
+	protected void setUsername(String username) {
 		this.username = username;
 	}
-    
-    protected void setPort(int port) {
+
+	protected void setPort(int port) {
 		this.port = port;
 	}
 }
