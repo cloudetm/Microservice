@@ -51,7 +51,7 @@ public class MongoConfigurationDev {
     }
 
     @Bean
-	public MongoTemplate mongoTemplate() {
+    public MongoTemplate mongoTemplate() {
         MongoTemplate mongoTemplate = new MongoTemplate(mongo(), "fongo");
         mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
         return mongoTemplate;

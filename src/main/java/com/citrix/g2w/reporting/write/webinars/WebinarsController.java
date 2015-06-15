@@ -44,30 +44,30 @@ import com.citrix.g2w.reporting.write.BaseController;
 @Slf4j
 public class WebinarsController extends BaseController {
 
-	public static final String BASE_URL = "/webinars";
+    public static final String BASE_URL = "/webinars";
 
-	@Autowired
-	private WebinarRepository webinarRepository;
+    @Autowired
+    private WebinarRepository webinarRepository;
 
-	/**
-	 * get webinars by webinar key.
-	 * 
-	 * @param webinarKey
-	 * @return
-	 */
-	@RequestMapping(value = BASE_URL + "/{webinarKey}", method = RequestMethod.GET, produces = {
-			"application/hal+json;charset=UTF-8",
-			"application/json;charset=UTF-8" })
-	public ResponseEntity<Resources<Webinar>> getWebinar(
-			@PathVariable long webinarKey) {
+    /**
+     * get webinars by webinar key.
+     * 
+     * @param webinarKey
+     * @return
+     */
+    @RequestMapping(value = BASE_URL + "/{webinarKey}", method = RequestMethod.GET, produces = {
+            "application/hal+json;charset=UTF-8",
+            "application/json;charset=UTF-8" })
+    public ResponseEntity<Resources<Webinar>> getWebinar(
+            @PathVariable long webinarKey) {
 
-		List<Webinar> webinars = webinarRepository.findByWebinarkey(webinarKey);
-		if (CollectionUtils.isEmpty(webinars)) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+        List<Webinar> webinars = webinarRepository.findByWebinarkey(webinarKey);
+        if (CollectionUtils.isEmpty(webinars)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-		Resources<Webinar> webinarResource = new Resources<Webinar>(webinars);
-		return new ResponseEntity<>(webinarResource, HttpStatus.OK);
-	}
+        Resources<Webinar> webinarResource = new Resources<Webinar>(webinars);
+        return new ResponseEntity<>(webinarResource, HttpStatus.OK);
+    }
 
 }

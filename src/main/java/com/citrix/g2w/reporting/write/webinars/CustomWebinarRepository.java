@@ -24,7 +24,7 @@ public interface CustomWebinarRepository {
     
     /**
      * upsert the Webinar.
-	 * @param webianrs
-	 */
+     * @param webianrs
+     */
     void upsert(List<Webinar> webianrs);
 }

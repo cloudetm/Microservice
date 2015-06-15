@@ -40,19 +40,19 @@ import com.citrix.g2w.reporting.write.webinars.WebinarsController;
 @Setter
 @Slf4j
 public class BaseController implements
-		ResourceProcessor<RepositoryLinksResource> {
+        ResourceProcessor<RepositoryLinksResource> {
 
-	@NotNull
-	private String baseURL;
+    @NotNull
+    private String baseURL;
 
-	/**
-	 * add resources.
-	 */
-	@Override
-	public RepositoryLinksResource process(RepositoryLinksResource resource) {
-		resource = new RepositoryLinksResource();
-		resource.add((new Link(baseURL + WebinarsController.BASE_URL
-				+ "/{webinarkey}")));
-		return resource;
-	}
+    /**
+     * add resources.
+     */
+    @Override
+    public RepositoryLinksResource process(RepositoryLinksResource resource) {
+        resource = new RepositoryLinksResource();
+        resource.add((new Link(baseURL + WebinarsController.BASE_URL
+                + "/{webinarkey}")));
+        return resource;
+    }
 }

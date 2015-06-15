@@ -34,13 +34,13 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 @Setter
 public class ReportingWrite extends SpringBootServletInitializer {
 
-	/**
-	 * start the application.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(ReportingWrite.class, args);
-	}
+    /**
+     * start the application.
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(ReportingWrite.class, args);
+    }
 
 }
