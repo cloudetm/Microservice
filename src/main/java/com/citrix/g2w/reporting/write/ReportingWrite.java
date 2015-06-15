@@ -24,7 +24,6 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * Application class for reporting write service.
- * 
  * @author ankit
  *
  */
@@ -36,10 +35,9 @@ public class ReportingWrite extends SpringBootServletInitializer {
 
     /**
      * start the application.
-     * 
-     * @param args
-     */
-    public static void main(String[] args) {
+	 * @param args
+	 */
+    public static void main(final String[] args) {
         SpringApplication.run(ReportingWrite.class, args);
     }
 

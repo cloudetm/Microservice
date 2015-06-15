@@ -34,7 +34,7 @@ import org.springframework.data.rest.core.annotation.Description;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * pojo for webinar collection
+ * pojo for webinar collection.
  * @author ankit
  *
  */
@@ -46,8 +46,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Webinar implements Serializable {
-    
-    @Description("Webinar key to which webinar is associated")
+
+	@Description("Webinar key to which webinar is associated")
     @Indexed
     private Long webinarkey;
 

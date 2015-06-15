@@ -30,7 +30,6 @@ import com.citrix.g2w.reporting.write.webinars.WebinarsController;
 
 /**
  * base controller for all resources.
- * 
  * @author ankit
  *
  */

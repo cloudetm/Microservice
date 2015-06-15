@@ -40,7 +40,6 @@ import lombok.Setter;
 
 /**
  * Configuration class needed to initialize MongoDB.
- * 
  * @author ankit
  *
  */
@@ -60,7 +59,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     private int port;
 
     @Bean
-    public MongoTemplate mongoTemplate(Mongo mongo) {
+    public MongoTemplate mongoTemplate(final Mongo mongo) {
         MongoTemplate mongoTemplate = new MongoTemplate(mongo,
                 getDatabaseName());
         mongoTemplate.setWriteConcern(WriteConcern.ACKNOWLEDGED);
@@ -98,28 +97,28 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {
-        ValidatingMongoEventListener validatingMongoEventListener = new ValidatingMongoEventListener(
-                validator());
+        ValidatingMongoEventListener validatingMongoEventListener = 
+        		new ValidatingMongoEventListener(validator());
         return validatingMongoEventListener;
     }
 
-    protected void setDatabase(String database) {
+    protected void setDatabase(final String database) {
         this.database = database;
     }
 
-    protected void setHosts(List<String> hosts) {
+    protected void setHosts(final List<String> hosts) {
         this.hosts = hosts;
     }
 
-    protected void setPassword(String password) {
+    protected void setPassword(final String password) {
         this.password = password;
     }
 
-    protected void setUsername(String username) {
+    protected void setUsername(final String username) {
         this.username = username;
     }
 
-    protected void setPort(int port) {
+    protected void setPort(final int port) {
         this.port = port;
     }
 }

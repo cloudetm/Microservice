@@ -11,6 +11,7 @@
  * License and Co-Branding Agreement between Citrix Online LLC and
  * the licensee.
  */
+
 package com.citrix.g2w.reporting.write.webinars;
 
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.List;
  *
  */
 public interface CustomWebinarRepository {
-    
-    /**
+
+	/**
      * upsert the Webinar.
      * @param webianrs
      */

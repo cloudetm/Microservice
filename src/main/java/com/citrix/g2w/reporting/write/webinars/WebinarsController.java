@@ -34,7 +34,6 @@ import com.citrix.g2w.reporting.write.BaseController;
 
 /**
  * controller for webinar collection.
- * 
  * @author ankit
  *
  */
@@ -51,15 +50,15 @@ public class WebinarsController extends BaseController {
 
     /**
      * get webinars by webinar key.
-     * 
      * @param webinarKey
      * @return
      */
-    @RequestMapping(value = BASE_URL + "/{webinarKey}", method = RequestMethod.GET, produces = {
+    @RequestMapping(value = BASE_URL + "/{webinarKey}", 
+    		method = RequestMethod.GET, produces = {
             "application/hal+json;charset=UTF-8",
             "application/json;charset=UTF-8" })
     public ResponseEntity<Resources<Webinar>> getWebinar(
-            @PathVariable long webinarKey) {
+            @PathVariable final long webinarKey) {
 
         List<Webinar> webinars = webinarRepository.findByWebinarkey(webinarKey);
         if (CollectionUtils.isEmpty(webinars)) {

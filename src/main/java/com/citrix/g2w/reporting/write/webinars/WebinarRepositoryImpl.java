@@ -13,7 +13,7 @@ public class WebinarRepositoryImpl implements CustomWebinarRepository {
      * upsert the list of webinars.
      */
     @Override
-    public void upsert(List<Webinar> webianrs) {
+    public void upsert(final List<Webinar> webianrs) {
         // TODO Auto-generated method stub
     }
 
