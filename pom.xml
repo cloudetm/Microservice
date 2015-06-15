@@ -46,7 +46,8 @@
 		<!-- for API testing -->
 		<com.jayway.version>2.4.0</com.jayway.version>
 		<fongo.version>1.6.2</fongo.version>
-
+		<microservice.test.support>1.0</microservice.test.support>
+		
 		<!-- Needed for reports to run -->
 		<findbugs.version>3.0.0</findbugs.version>
 		<checkstyle.version>2.15</checkstyle.version>
@@ -139,6 +140,12 @@
 			<scope>test</scope>
 			<version>${powermock.version}</version>
 		</dependency>
+		 <dependency>
+            <groupId>com.citrix.g2w.microservice</groupId>
+            <artifactId>microservice-test-support</artifactId>
+            <version>${microservice.test.support}</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-easymock</artifactId>
