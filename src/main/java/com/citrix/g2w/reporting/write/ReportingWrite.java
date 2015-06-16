@@ -14,12 +14,8 @@
 
 package com.citrix.g2w.reporting.write;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
@@ -28,9 +24,6 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  *
  */
 @SpringBootApplication
-@ConfigurationProperties
-@Getter
-@Setter
 public class ReportingWrite extends SpringBootServletInitializer {
 
     /**

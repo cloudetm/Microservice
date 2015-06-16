@@ -16,11 +16,8 @@ package com.citrix.g2w.reporting.write;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -39,9 +36,6 @@ import com.google.common.collect.Lists;
  *
  */
 @Configuration
-@ComponentScan
-@Getter
-@Setter
 @ConfigurationProperties(prefix = "reporting.queues")
 public class QueueConfiguration {
 	
@@ -55,21 +49,28 @@ public class QueueConfiguration {
 	 * listener for webinarReaasignmentEvent
 	 * @return
 	 */
-	public PollingMessageListenerContainer<WebinarReassignmentEvent> webinarReassignmentEventListener() {
+	@Bean
+	public PollingMessageListenerContainer<WebinarReassignmentEvent> webinarReassignmentEventContainer() {
 		PollingMessageListenerContainer<WebinarReassignmentEvent> container = new PollingMessageListenerContainer<WebinarReassignmentEvent>();
 		container.setQueueService(queueService());
 		container.setQueueName(prefix + "WebinarReassignmentEvent" + listener);
 		container.setServiceAddresses(servers);
 		container.setResponseType(WebinarReassignmentEvent.class);
 		container.setTransactional(true);
-		container.setMessageListener(new WebinarReassignmentEventListener());
+		container.setMessageListener(webinarReassignmentEventListener());
 		return container;
 	}
+	
+	@Bean
+	public WebinarReassignmentEventListener webinarReassignmentEventListener() {
+		return new WebinarReassignmentEventListener();
+    }
 	
 	/**
 	 * queue service
 	 * @return
 	 */
+	@Bean
 	public QueueServiceImpl queueService() {
 		QueueServiceImpl queueService = new QueueServiceImpl();
 		queueService.setRestTemplate(jsonRestTemplate());
@@ -80,6 +81,7 @@ public class QueueConfiguration {
 	 * rest template
 	 * @return
 	 */
+	@Bean
 	public RestTemplate jsonRestTemplate() {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setRequestFactory(httpRequestFactory());
@@ -94,10 +96,52 @@ public class QueueConfiguration {
 	 * request factory
 	 * @return
 	 */
+	@Bean
 	public SimpleClientHttpRequestFactory httpRequestFactory() {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setReadTimeout(readTimeout);
 		requestFactory.setConnectTimeout(connectTimeout);
 		return requestFactory;
 	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public String getListener() {
+		return listener;
+	}
+
+	public void setListener(String listener) {
+		this.listener = listener;
+	}
+
+	public String getServers() {
+		return servers;
+	}
+
+	public void setServers(String servers) {
+		this.servers = servers;
+	}
+
+	public int getReadTimeout() {
+		return readTimeout;
+	}
+
+	public void setReadTimeout(int readTimeout) {
+		this.readTimeout = readTimeout;
+	}
+
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+
+	public void setConnectTimeout(int connectTimeout) {
+		this.connectTimeout = connectTimeout;
+	}
+	
 }

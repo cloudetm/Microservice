@@ -14,7 +14,7 @@ public class WebinarReassignmentEventListener implements MessageListener<Webinar
 	 * process event
 	 */
 	@Override
-    public void onMessage(WebinarReassignmentEvent paramT) throws Exception {
+    public void onMessage(WebinarReassignmentEvent event) throws Exception {
 	    // TODO Auto-generated method stub
     }
 

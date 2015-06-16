@@ -31,4 +31,5 @@ import org.springframework.transaction.annotation.Transactional;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("test")
 @Transactional
-public abstract class AbstractIntegrationTest {}
+public abstract class AbstractIntegrationTest {
+}

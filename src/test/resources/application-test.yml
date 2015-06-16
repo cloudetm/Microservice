@@ -5,4 +5,12 @@ spring:
   cloud:
     config:
       enabled: false
+
+reporting:
+  queues:
+    readTimeout: 5000
+    connectTimeout: 5000
+    prefix: test.com.citrix.g2w.reporting.events.
+    listener: reporting
+    servers: ed1.queue1svc.qai.expertcity.com:80,ed1.queue2svc.qai.expertcity.com:80           
       

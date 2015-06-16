@@ -15,7 +15,6 @@
 package com.citrix.g2w.reporting.write;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,8 +23,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import com.github.fakemongo.Fongo;
 import com.mongodb.Mongo;
 import com.mongodb.WriteConcern;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Test Mongo cofiguration to enable all tests
@@ -35,10 +32,7 @@ import lombok.Setter;
  *
  */
 @Configuration
-@ComponentScan
 @EnableMongoRepositories
-@Getter
-@Setter
 @Profile({"dev", "test"})
 public class MongoConfigurationDev {
 

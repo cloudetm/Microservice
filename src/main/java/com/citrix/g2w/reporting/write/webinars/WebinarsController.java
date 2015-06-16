@@ -16,8 +16,6 @@ package com.citrix.g2w.reporting.write.webinars;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +34,6 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@Getter
-@Setter
 @Slf4j
 public class WebinarsController {
 

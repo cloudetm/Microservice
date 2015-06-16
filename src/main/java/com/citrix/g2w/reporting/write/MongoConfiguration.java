@@ -14,9 +14,12 @@
 
 package com.citrix.g2w.reporting.write;
 
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -25,18 +28,12 @@ import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventL
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteConcern;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Configuration class needed to initialize MongoDB.
@@ -44,10 +41,7 @@ import lombok.Setter;
  *
  */
 @Configuration
-@ComponentScan
 @EnableMongoRepositories
-@Getter
-@Setter
 @ConfigurationProperties(prefix = "spring.data.mongodb")
 @Profile({ "ED", "RC", "STAGE", "LIVE" })
 public class MongoConfiguration extends AbstractMongoConfiguration {
@@ -101,4 +95,46 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
                 new ValidatingMongoEventListener(validator());
         return validatingMongoEventListener;
     }
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(String database) {
+		this.database = database;
+	}
+
+	public List<String> getHosts() {
+		return hosts;
+	}
+
+	public void setHosts(List<String> hosts) {
+		this.hosts = hosts;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+    
+    
 }
