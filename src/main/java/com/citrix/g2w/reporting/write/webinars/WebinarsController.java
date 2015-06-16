@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.citrix.g2w.reporting.write.BaseController;
+
 /**
  * controller for webinar collection.
  * @author ankit
@@ -39,7 +41,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Getter
 @Setter
 @Slf4j
-public class WebinarsController {
+public class WebinarsController extends BaseController {
 
     public static final String BASE_URL = "/webinars";
 
