@@ -51,6 +51,10 @@ public class QueueConfiguration {
 	private int readTimeout;
 	private int connectTimeout;
 	
+	/**
+	 * listener for webinarReaasignmentEvent
+	 * @return
+	 */
 	public PollingMessageListenerContainer<WebinarReassignmentEvent> webinarReassignmentEventListener() {
 		PollingMessageListenerContainer<WebinarReassignmentEvent> container = new PollingMessageListenerContainer<WebinarReassignmentEvent>();
 		container.setQueueService(queueService());
@@ -62,12 +66,20 @@ public class QueueConfiguration {
 		return container;
 	}
 	
+	/**
+	 * queue service
+	 * @return
+	 */
 	public QueueServiceImpl queueService() {
 		QueueServiceImpl queueService = new QueueServiceImpl();
 		queueService.setRestTemplate(jsonRestTemplate());
 		return queueService;
 	}
 	
+	/**
+	 * rest template
+	 * @return
+	 */
 	public RestTemplate jsonRestTemplate() {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setRequestFactory(httpRequestFactory());
@@ -78,6 +90,10 @@ public class QueueConfiguration {
 		return restTemplate;
 	}
 	
+	/**
+	 * request factory
+	 * @return
+	 */
 	public SimpleClientHttpRequestFactory httpRequestFactory() {
 		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 		requestFactory.setReadTimeout(readTimeout);

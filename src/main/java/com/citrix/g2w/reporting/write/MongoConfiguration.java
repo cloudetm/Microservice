@@ -101,24 +101,4 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
                 new ValidatingMongoEventListener(validator());
         return validatingMongoEventListener;
     }
-
-    protected void setDatabase(final String database) {
-        this.database = database;
-    }
-
-    protected void setHosts(final List<String> hosts) {
-        this.hosts = hosts;
-    }
-
-    protected void setPassword(final String password) {
-        this.password = password;
-    }
-
-    protected void setUsername(final String username) {
-        this.username = username;
-    }
-
-    protected void setPort(final int port) {
-        this.port = port;
-    }
 }
