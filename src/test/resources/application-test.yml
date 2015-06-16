@@ -1,1 +1,8 @@
 port: 8080
+spring:
+  application:
+    name: g2wreportingWriteService
+  cloud:
+    config:
+      enabled: false
+      

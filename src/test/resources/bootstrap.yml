@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: g2wreportingWriteService
-  cloud:
-    config:
-      enabled: false
