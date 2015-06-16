@@ -16,14 +16,9 @@ package com.citrix.g2w.reporting.write.webinars;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MicroserviceMockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.web.context.WebApplicationContext;
 
-import com.citrix.g2w.microservice.testsupport.MicroserviceMockMvcBuilder;
 import com.citrix.g2w.reporting.write.AbstractWebIntegrationTest;
 
 /**
@@ -32,16 +27,6 @@ import com.citrix.g2w.reporting.write.AbstractWebIntegrationTest;
  *
  */
 public class WebinarsControllerIntegrationTests extends AbstractWebIntegrationTest {
-
-    protected MicroserviceMockMvc mvc;
-    @Autowired
-    protected WebApplicationContext context;
-
-    @Before
-    public void setUp() {
-        mvc = MicroserviceMockMvcBuilder.webAppContextSetup(context).
-                buildMvc();
-    }
 
     /**
      * For a sanity check we only want to test that the annotation is in play, getting a 403 will verify that
