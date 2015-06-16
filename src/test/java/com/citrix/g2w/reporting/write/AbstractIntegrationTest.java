@@ -16,7 +16,6 @@ package com.citrix.g2w.reporting.write;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,9 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {AbstractWebIntegrationTest.TestConfig.class, ReportingWrite.class})
+@SpringApplicationConfiguration(classes = {ReportingWrite.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @ActiveProfiles("test")
 @Transactional
-@WebIntegrationTest
 public abstract class AbstractIntegrationTest {}
