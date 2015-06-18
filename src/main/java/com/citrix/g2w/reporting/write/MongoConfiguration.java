@@ -96,45 +96,44 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         return validatingMongoEventListener;
     }
 
-	public String getDatabase() {
-		return database;
-	}
+    public String getDatabase() {
+        return database;
+    }
 
-	public void setDatabase(String database) {
-		this.database = database;
-	}
+    public void setDatabase(String database) {
+        this.database = database;
+    }
 
-	public List<String> getHosts() {
-		return hosts;
-	}
+    public List<String> getHosts() {
+        return hosts;
+    }
 
-	public void setHosts(List<String> hosts) {
-		this.hosts = hosts;
-	}
+    public void setHosts(List<String> hosts) {
+        this.hosts = hosts;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public int getPort() {
-		return port;
-	}
+    public int getPort() {
+        return port;
+    }
 
-	public void setPort(int port) {
-		this.port = port;
-	}
-    
+    public void setPort(int port) {
+        this.port = port;
+    }
     
 }

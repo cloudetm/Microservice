@@ -10,12 +10,12 @@ import com.citrix.queue.support.MessageListener;
  */
 public class WebinarReassignmentEventListener implements MessageListener<WebinarReassignmentEvent> {
 
-	/**
-	 * process event
-	 */
-	@Override
+    /**
+     * process event
+     */
+    @Override
     public void onMessage(WebinarReassignmentEvent event) throws Exception {
-	    // TODO Auto-generated method stub
+        // TODO Auto-generated method stub
     }
 
 }

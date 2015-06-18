@@ -38,110 +38,110 @@ import com.google.common.collect.Lists;
 @Configuration
 @ConfigurationProperties(prefix = "reporting.queues")
 public class QueueConfiguration {
-	
-	private String prefix;
-	private String listener;
-	private String servers;
-	private int readTimeout;
-	private int connectTimeout;
-	
-	/**
-	 * listener for webinarReaasignmentEvent
-	 * @return
-	 */
-	@Bean
-	public PollingMessageListenerContainer<WebinarReassignmentEvent> webinarReassignmentEventContainer() {
-		PollingMessageListenerContainer<WebinarReassignmentEvent> container = new PollingMessageListenerContainer<WebinarReassignmentEvent>();
-		container.setQueueService(queueService());
-		container.setQueueName(prefix + "WebinarReassignmentEvent" + listener);
-		container.setServiceAddresses(servers);
-		container.setResponseType(WebinarReassignmentEvent.class);
-		container.setTransactional(true);
-		container.setMessageListener(webinarReassignmentEventListener());
-		return container;
-	}
-	
-	@Bean
-	public WebinarReassignmentEventListener webinarReassignmentEventListener() {
-		return new WebinarReassignmentEventListener();
+    
+    private String prefix;
+    private String listener;
+    private String servers;
+    private int readTimeout;
+    private int connectTimeout;
+    
+    /**
+     * listener for webinarReaasignmentEvent
+     * @return
+     */
+    @Bean
+    public PollingMessageListenerContainer<WebinarReassignmentEvent> webinarReassignmentEventContainer() {
+        PollingMessageListenerContainer<WebinarReassignmentEvent> container = new PollingMessageListenerContainer<WebinarReassignmentEvent>();
+        container.setQueueService(queueService());
+        container.setQueueName(prefix + "WebinarReassignmentEvent" + listener);
+        container.setServiceAddresses(servers);
+        container.setResponseType(WebinarReassignmentEvent.class);
+        container.setTransactional(true);
+        container.setMessageListener(webinarReassignmentEventListener());
+        return container;
     }
-	
-	/**
-	 * queue service
-	 * @return
-	 */
-	@Bean
-	public QueueServiceImpl queueService() {
-		QueueServiceImpl queueService = new QueueServiceImpl();
-		queueService.setRestTemplate(jsonRestTemplate());
-		return queueService;
-	}
-	
-	/**
-	 * rest template
-	 * @return
-	 */
-	@Bean
-	public RestTemplate jsonRestTemplate() {
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.setRequestFactory(httpRequestFactory());
-		List<HttpMessageConverter<?>> messageConverters = Lists.newArrayList();
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		messageConverters.add(converter);
-		restTemplate.setMessageConverters(messageConverters);
-		return restTemplate;
-	}
-	
-	/**
-	 * request factory
-	 * @return
-	 */
-	@Bean
-	public SimpleClientHttpRequestFactory httpRequestFactory() {
-		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-		requestFactory.setReadTimeout(readTimeout);
-		requestFactory.setConnectTimeout(connectTimeout);
-		return requestFactory;
-	}
+    
+    @Bean
+    public WebinarReassignmentEventListener webinarReassignmentEventListener() {
+        return new WebinarReassignmentEventListener();
+    }
+    
+    /**
+     * queue service
+     * @return
+     */
+    @Bean
+    public QueueServiceImpl queueService() {
+        QueueServiceImpl queueService = new QueueServiceImpl();
+        queueService.setRestTemplate(jsonRestTemplate());
+        return queueService;
+    }
+    
+    /**
+     * rest template
+     * @return
+     */
+    @Bean
+    public RestTemplate jsonRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setRequestFactory(httpRequestFactory());
+        List<HttpMessageConverter<?>> messageConverters = Lists.newArrayList();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        messageConverters.add(converter);
+        restTemplate.setMessageConverters(messageConverters);
+        return restTemplate;
+    }
+    
+    /**
+     * request factory
+     * @return
+     */
+    @Bean
+    public SimpleClientHttpRequestFactory httpRequestFactory() {
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setReadTimeout(readTimeout);
+        requestFactory.setConnectTimeout(connectTimeout);
+        return requestFactory;
+    }
 
-	public String getPrefix() {
-		return prefix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	public String getListener() {
-		return listener;
-	}
+    public String getListener() {
+        return listener;
+    }
 
-	public void setListener(String listener) {
-		this.listener = listener;
-	}
+    public void setListener(String listener) {
+        this.listener = listener;
+    }
 
-	public String getServers() {
-		return servers;
-	}
+    public String getServers() {
+        return servers;
+    }
 
-	public void setServers(String servers) {
-		this.servers = servers;
-	}
+    public void setServers(String servers) {
+        this.servers = servers;
+    }
 
-	public int getReadTimeout() {
-		return readTimeout;
-	}
+    public int getReadTimeout() {
+        return readTimeout;
+    }
 
-	public void setReadTimeout(int readTimeout) {
-		this.readTimeout = readTimeout;
-	}
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+    }
 
-	public int getConnectTimeout() {
-		return connectTimeout;
-	}
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
 
-	public void setConnectTimeout(int connectTimeout) {
-		this.connectTimeout = connectTimeout;
-	}
-	
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+    
 }
