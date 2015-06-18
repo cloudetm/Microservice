@@ -16,6 +16,9 @@ package com.citrix.g2w.reporting.write;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +39,8 @@ import com.google.common.collect.Lists;
  *
  */
 @Configuration
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "reporting.queues")
 public class QueueConfiguration {
     
@@ -104,44 +109,4 @@ public class QueueConfiguration {
         return requestFactory;
     }
 
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public String getListener() {
-        return listener;
-    }
-
-    public void setListener(String listener) {
-        this.listener = listener;
-    }
-
-    public String getServers() {
-        return servers;
-    }
-
-    public void setServers(String servers) {
-        this.servers = servers;
-    }
-
-    public int getReadTimeout() {
-        return readTimeout;
-    }
-
-    public void setReadTimeout(int readTimeout) {
-        this.readTimeout = readTimeout;
-    }
-
-    public int getConnectTimeout() {
-        return connectTimeout;
-    }
-
-    public void setConnectTimeout(int connectTimeout) {
-        this.connectTimeout = connectTimeout;
-    }
-    
 }

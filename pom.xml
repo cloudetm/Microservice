@@ -30,7 +30,7 @@
 		<!-- miscellaneous -->
 		<clover.version>4.0.3</clover.version>
 		<surefire.report.plugin.version>2.18.1</surefire.report.plugin.version>
-
+        <lombok.version>1.16.4</lombok.version>
 
 		<!-- g2w microservices base libraries -->
 		<microservice.support.version>1.0.0-SNAPSHOT</microservice.support.version>
@@ -166,6 +166,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
 		</dependency>
 
 		<!-- Google Guava -->

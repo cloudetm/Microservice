@@ -14,21 +14,20 @@
 
 package com.citrix.g2w.reporting.write;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
-import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
 
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
-import com.mongodb.Mongo;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
+import com.mongodb.Mongo;
 
 /**
  * Tests for {@link MongoConfiguration}
@@ -42,11 +41,11 @@ public class MongoConfigurationTests {
     @Before
     public void setup() {
         mongoConfiguration = new MongoConfiguration();
-        ReflectionTestUtils.setField(mongoConfiguration, "database", "test");
-        ReflectionTestUtils.setField(mongoConfiguration, "hosts", Arrays.asList("localhost"));
-        ReflectionTestUtils.setField(mongoConfiguration, "port", 8080);
-        ReflectionTestUtils.setField(mongoConfiguration, "username", "username");
-        ReflectionTestUtils.setField(mongoConfiguration, "password", "password");
+        mongoConfiguration.setDatabase("test");
+        mongoConfiguration.setHosts(Arrays.asList("localhost"));
+        mongoConfiguration.setPort(8080);
+        mongoConfiguration.setUsername("username");
+        mongoConfiguration.setPassword("password");
     }
 
     @Test
@@ -76,20 +75,20 @@ public class MongoConfigurationTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void testGetMongoTemplateWithNullDatabaseName() throws UnknownHostException {
-    	ReflectionTestUtils.setField(mongoConfiguration, "database", null);
+        mongoConfiguration.setDatabase(null);
         mongoConfiguration.mongoTemplate(mongoConfiguration.mongo());
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetMongoClientWithNullHost() throws UnknownHostException {
-    	ReflectionTestUtils.setField(mongoConfiguration, "hosts", null);
+        mongoConfiguration.setHosts(null);
         Mongo aMongo = mongoConfiguration.mongo();
         assertThat(aMongo, is(notNullValue()));
     }
 
     @Test
     public void testGetMongoClientWithNegativePort() throws UnknownHostException {
-    	ReflectionTestUtils.setField(mongoConfiguration, "port", -1);
+        mongoConfiguration.setPort(-1);
         Mongo aMongo = mongoConfiguration.mongo();
         assertThat(aMongo, is(notNullValue()));
     }

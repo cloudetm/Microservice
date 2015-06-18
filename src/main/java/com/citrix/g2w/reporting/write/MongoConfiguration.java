@@ -18,6 +18,9 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +45,8 @@ import com.mongodb.WriteConcern;
  */
 @Configuration
 @EnableMongoRepositories
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "spring.data.mongodb")
 @Profile({ "ED", "RC", "STAGE", "LIVE" })
 public class MongoConfiguration extends AbstractMongoConfiguration {
@@ -96,44 +101,4 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         return validatingMongoEventListener;
     }
 
-    public String getDatabase() {
-        return database;
-    }
-
-    public void setDatabase(String database) {
-        this.database = database;
-    }
-
-    public List<String> getHosts() {
-        return hosts;
-    }
-
-    public void setHosts(List<String> hosts) {
-        this.hosts = hosts;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-    
 }

@@ -23,7 +23,6 @@ import java.net.UnknownHostException;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.citrix.g2w.reporting.events.webinars.WebinarReassignmentEvent;
@@ -39,48 +38,46 @@ import com.citrix.queue.support.QueueService;
  */
 public class QueueConfigurationTests {
 
-	private QueueConfiguration queueConfiguration;
+    private QueueConfiguration queueConfiguration;
 
-	@Before
-	public void setup() {
-		queueConfiguration = new QueueConfiguration();
-		ReflectionTestUtils.setField(queueConfiguration, "prefix", "test");
-		ReflectionTestUtils.setField(queueConfiguration, "listener", "dummy");
-		ReflectionTestUtils.setField(queueConfiguration, "servers", "local");
-		ReflectionTestUtils
-		        .setField(queueConfiguration, "readTimeout", 10);
-		ReflectionTestUtils
-		        .setField(queueConfiguration, "connectTimeout", 10);
-	}
+    @Before
+    public void setup() {
+        queueConfiguration = new QueueConfiguration();
+        queueConfiguration.setPrefix("test");
+        queueConfiguration.setListener("dummy");
+        queueConfiguration.setServers("local");
+        queueConfiguration.setReadTimeout(10);
+        queueConfiguration.setConnectTimeout(10);
+    }
 
-	@Test
-	public void testGetWebinarReassignmentEventContainer() {
-		PollingMessageListenerContainer<WebinarReassignmentEvent> container = queueConfiguration.webinarReassignmentEventContainer();
-		assertThat(container, is(notNullValue()));
-	}
-	
-	@Test
-	public void testGetWebinarReassignmentEventListener() throws UnknownHostException {
-		WebinarReassignmentEventListener listener = queueConfiguration.webinarReassignmentEventListener();
-		assertThat(listener, is(notNullValue()));
-	}
-	
-	@Test
-	public void testGetQueueService() {
-		QueueService service = queueConfiguration.queueService();
-		assertThat(service, is(notNullValue()));
-	}
-	
-	@Test
-	public void testGetHttpRequestFactory() throws UnknownHostException {
-		SimpleClientHttpRequestFactory httpRequestFactory = queueConfiguration.httpRequestFactory();
-		assertThat(httpRequestFactory, is(notNullValue()));
-	}
-	
-	@Test
-	public void testGetRestTemplate() throws UnknownHostException {
-		RestTemplate restTemplate = queueConfiguration.jsonRestTemplate();
-		assertThat(restTemplate, is(notNullValue()));
-	}
+    @Test
+    public void testGetWebinarReassignmentEventContainer() {
+        PollingMessageListenerContainer<WebinarReassignmentEvent> container = queueConfiguration.webinarReassignmentEventContainer();
+        assertThat(container, is(notNullValue()));
+    }
+    
+    @Test
+    public void testGetWebinarReassignmentEventListener() throws UnknownHostException {
+        WebinarReassignmentEventListener listener = queueConfiguration.webinarReassignmentEventListener();
+        assertThat(listener, is(notNullValue()));
+    }
+    
+    @Test
+    public void testGetQueueService() {
+        QueueService service = queueConfiguration.queueService();
+        assertThat(service, is(notNullValue()));
+    }
+    
+    @Test
+    public void testGetHttpRequestFactory() throws UnknownHostException {
+        SimpleClientHttpRequestFactory httpRequestFactory = queueConfiguration.httpRequestFactory();
+        assertThat(httpRequestFactory, is(notNullValue()));
+    }
+    
+    @Test
+    public void testGetRestTemplate() throws UnknownHostException {
+        RestTemplate restTemplate = queueConfiguration.jsonRestTemplate();
+        assertThat(restTemplate, is(notNullValue()));
+    }
 
 }
