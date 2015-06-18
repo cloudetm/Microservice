@@ -15,9 +15,7 @@ package com.citrix.g2w.reporting.write.webinars;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.easymock.EasyMock;
@@ -25,7 +23,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -61,9 +58,11 @@ public class WebinarsControllerTests {
     @Test
     public void testGetWebinarNotFound() {
         List<Webinar> webinars = Lists.newArrayList();
+        Webinar webinar = new Webinar();
+        EasyMock.expect(webinarRepository.insert(EasyMock.anyObject(Webinar.class))).andReturn(webinar);
         EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
         doReplay();
-        ResponseEntity webinarResource = controller.getWebinar(123L);
+        ResponseEntity<Webinar> webinarResource = controller.getWebinar(123L);
         assertEquals(HttpStatus.NOT_FOUND, webinarResource.getStatusCode());
         doVerify();
     }
@@ -73,16 +72,14 @@ public class WebinarsControllerTests {
         List<Webinar> webinars = Lists.newArrayList();
         Webinar webinar = new Webinar();
         webinars.add(webinar);
+        EasyMock.expect(webinarRepository.insert(EasyMock.anyObject(Webinar.class))).andReturn(webinar);
         EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
         doReplay();
-        ResponseEntity<Resources<Webinar>> webinarResource = controller.getWebinar(123L);
+        ResponseEntity<Webinar> webinarResource = controller.getWebinar(123L);
         assertEquals(HttpStatus.OK, webinarResource.getStatusCode());
-        Resources<Webinar> resource = webinarResource.getBody();
-        assertNotNull(resource);
-        Collection<Webinar> webinarsResult = resource.getContent();
+        Webinar webinarsResult = webinarResource.getBody();
         assertNotNull(webinarsResult);
-        assertTrue(webinarsResult.size() ==  1);
-        assertEquals(webinar.getWebinarkey(), webinarsResult.iterator().next().getWebinarkey());
+        assertEquals(webinar.getWebinarkey(), webinarsResult.getWebinarkey());
         doVerify();
     }
 }
