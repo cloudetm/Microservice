@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -62,7 +63,7 @@ public class WebinarsControllerTests {
         EasyMock.expect(webinarRepository.insert(EasyMock.anyObject(Webinar.class))).andReturn(webinar);
         EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
         doReplay();
-        ResponseEntity<Webinar> webinarResource = controller.getWebinar(123L);
+        ResponseEntity<Resource<Webinar>> webinarResource = controller.getWebinar(123L);
         assertEquals(HttpStatus.NOT_FOUND, webinarResource.getStatusCode());
         doVerify();
     }
@@ -75,9 +76,9 @@ public class WebinarsControllerTests {
         EasyMock.expect(webinarRepository.insert(EasyMock.anyObject(Webinar.class))).andReturn(webinar);
         EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
         doReplay();
-        ResponseEntity<Webinar> webinarResource = controller.getWebinar(123L);
+        ResponseEntity<Resource<Webinar>> webinarResource = controller.getWebinar(123L);
         assertEquals(HttpStatus.OK, webinarResource.getStatusCode());
-        Webinar webinarsResult = webinarResource.getBody();
+        Webinar webinarsResult = webinarResource.getBody().getContent();
         assertNotNull(webinarsResult);
         assertEquals(webinar.getWebinarkey(), webinarsResult.getWebinarkey());
         doVerify();
