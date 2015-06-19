@@ -16,7 +16,6 @@ package com.citrix.g2w.reporting.write;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * Application class for reporting write service.
@@ -24,13 +23,13 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  *
  */
 @SpringBootApplication
-public class ReportingWrite extends SpringBootServletInitializer {
+public class ReportingWrite {
 
     /**
      * start the application.
      * @param args
      */
-    public static void main(final String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(ReportingWrite.class, args);
     }
 

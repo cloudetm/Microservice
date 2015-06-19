@@ -27,7 +27,7 @@ spring:
   main:
     show-banner: false
   jmx:
-    default_domain: com.citrix.g2w.reporting.write
+    default_domain: com.citrix.g2wreportingwrite
 
 info:
   service:
