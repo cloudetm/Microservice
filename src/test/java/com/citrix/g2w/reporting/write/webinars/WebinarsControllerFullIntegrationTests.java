@@ -13,10 +13,8 @@
  */
 package com.citrix.g2w.reporting.write.webinars;
 
-import static 
-	org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static 
-	org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MicroserviceMockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -44,6 +43,7 @@ import com.citrix.g2w.reporting.write.ReportingWrite;
 	{ AbstractWebIntegrationTest.TestConfig.class, ReportingWrite.class })
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @WebIntegrationTest
+@ActiveProfiles("test")
 public class WebinarsControllerFullIntegrationTests {
 
     protected MicroserviceMockMvc mvc;
@@ -60,7 +60,7 @@ public class WebinarsControllerFullIntegrationTests {
      * For a sanity check we only want to test that the annotation is in play, getting a 403 will verify that
      */
     @Test
-    public void getWebinarNotFound() throws Exception {
+    public void getWebinar() throws Exception {
         mvc.perform(get("/webinars/1234")).
                 andDo(MockMvcResultHandlers.print()).
                 andExpect(status().isOk());

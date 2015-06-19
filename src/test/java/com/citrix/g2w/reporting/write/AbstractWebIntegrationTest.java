@@ -14,8 +14,6 @@
 
 package com.citrix.g2w.reporting.write;
 
-import lombok.extern.java.Log;
-
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MicroserviceMockMvc;
@@ -35,11 +34,11 @@ import com.citrix.g2w.microservice.testsupport.MicroserviceMockMvcBuilder;
  * @author ankit
  *
  */
-@Log
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = {AbstractWebIntegrationTest.TestConfig.class, ReportingWrite.class})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@ActiveProfiles("test")
 public abstract class AbstractWebIntegrationTest {
 
     @Autowired

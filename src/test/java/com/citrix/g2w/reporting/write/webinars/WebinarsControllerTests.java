@@ -23,6 +23,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,20 +42,23 @@ public class WebinarsControllerTests {
 
     private WebinarsController controller;
     private WebinarRepository webinarRepository;
+    private EntityLinks entityLinks;
 
     @Before
     public void setup(){
         controller = new WebinarsController();
         webinarRepository = EasyMock.createMock(WebinarRepository.class);
+        entityLinks = EasyMock.createMock(EntityLinks.class);
         ReflectionTestUtils.setField(controller, "webinarRepository", webinarRepository);
+        ReflectionTestUtils.setField(controller, "entityLinks", entityLinks);
     }
     
     public void doReplay() {
-        EasyMock.replay(webinarRepository);
+        EasyMock.replay(webinarRepository, entityLinks);
     }
     
     public void doVerify() {
-        EasyMock.verify(webinarRepository);
+        EasyMock.verify(webinarRepository, entityLinks);
     }
     
     @Test
@@ -75,6 +80,7 @@ public class WebinarsControllerTests {
         webinars.add(webinar);
         EasyMock.expect(webinarRepository.insert(EasyMock.anyObject(Webinar.class))).andReturn(webinar);
         EasyMock.expect(webinarRepository.findByWebinarkey(123L)).andReturn(webinars);
+        EasyMock.expect(entityLinks.linkToSingleResource(Webinar.class, 123L)).andReturn(new Link("w"));
         doReplay();
         ResponseEntity<Resource<Webinar>> webinarResource = controller.getWebinar(123L);
         assertEquals(HttpStatus.OK, webinarResource.getStatusCode());

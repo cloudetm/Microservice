@@ -16,10 +16,17 @@ package com.citrix.g2w.reporting.write;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.core.ControllerEntityLinks;
+import org.springframework.hateoas.mvc.ControllerLinkBuilderFactory;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.collect.Lists;
 
 /**
  * base abstract class to be used by all integration tests
@@ -32,4 +39,13 @@ import org.springframework.transaction.annotation.Transactional;
 @ActiveProfiles("test")
 @Transactional
 public abstract class AbstractIntegrationTest {
+	
+	@Configuration
+    public static class TestConfig {
+		
+		@Bean
+		public EntityLinks entityLinks() throws Exception {
+			return new ControllerEntityLinks(Lists.newArrayList(), new ControllerLinkBuilderFactory());
+		}
+    }
 }

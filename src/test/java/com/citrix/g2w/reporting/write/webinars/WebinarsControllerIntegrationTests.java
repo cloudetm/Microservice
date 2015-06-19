@@ -32,7 +32,7 @@ public class WebinarsControllerIntegrationTests extends AbstractWebIntegrationTe
      * For a sanity check we only want to test that the annotation is in play, getting a 403 will verify that
      */
     @Test
-    public void getWebinarNotFound() throws Exception {
+    public void getWebinar() throws Exception {
         mvc.perform(get("/webinars/1234")).
                 andDo(MockMvcResultHandlers.print()).
                 andExpect(status().isOk());
