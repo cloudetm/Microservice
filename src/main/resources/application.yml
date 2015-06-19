@@ -37,12 +37,7 @@ info:
       rpmBuild: ${rpm.build:unknown}
 
 logging:
-  file: g2wreportingwrite.log
-  level:
-    #com.netflix.discovery: OFF
-    com: INFO
-    org: INFO
-    net: INFO
+  file: logs/g2wreportingwrite.log
 
 log:
   access:
